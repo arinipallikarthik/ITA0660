@@ -1,0 +1,91 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyP18gX8YpxSumb/RCTCK8ad",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/arinipallikarthik/ITA0660/blob/main/1st%20q\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import numpy as np\n",
+        "\n",
+        "# Training data (AND Gate)\n",
+        "X = np.array([[0,0],\n",
+        "              [0,1],\n",
+        "              [1,0],\n",
+        "              [1,1]])\n",
+        "\n",
+        "y = np.array([0,0,0,1])\n",
+        "\n",
+        "# Initialize weights and bias\n",
+        "weights = np.zeros(2)\n",
+        "bias = 0\n",
+        "learning_rate = 0.1\n",
+        "\n",
+        "# Training\n",
+        "for epoch in range(100):\n",
+        "    errors = 0\n",
+        "\n",
+        "    for i in range(len(X)):\n",
+        "        net = np.dot(X[i], weights) + bias\n",
+        "\n",
+        "        prediction = 1 if net >= 0 else 0\n",
+        "\n",
+        "        error = y[i] - prediction\n",
+        "\n",
+        "        weights += learning_rate * error * X[i]\n",
+        "        bias += learning_rate * error\n",
+        "\n",
+        "        errors += abs(error)\n",
+        "\n",
+        "    if errors == 0:\n",
+        "        print(\"Converged at Epoch:\", epoch+1)\n",
+        "        break\n",
+        "\n",
+        "print(\"Weights:\", weights)\n",
+        "print(\"Bias:\", bias)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "RPy3vblncAT9",
+        "outputId": "e6790b23-fc43-4c5d-adf5-0b634359b74d"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Converged at Epoch: 4\n",
+            "Weights: [0.2 0.1]\n",
+            "Bias: -0.20000000000000004\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
